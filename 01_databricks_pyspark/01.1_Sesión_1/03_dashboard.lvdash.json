@@ -1,0 +1,361 @@
+{
+  "datasets": [
+    {
+      "name": "0f3efd9e",
+      "displayName": "fct_clientes_compras",
+      "config": {
+        "version": "1.1",
+        "source": "workspace.default.fct_clientes_compras",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    }
+  ],
+  "pages": [
+    {
+      "name": "0b9958fe",
+      "displayName": "Untitled page",
+      "layout": [
+        {
+          "widget": {
+            "name": "5d0d74b1",
+            "multilineTextboxSpec": {
+              "lines": [
+                "# <span style=\"text-align:center;display:block\">Dashboard de Compras</span>"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "6ce8b999",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "0f3efd9e",
+                  "fields": [
+                    {
+                      "name": "comunidadAutonoma",
+                      "expression": "`comunidadAutonoma`"
+                    },
+                    {
+                      "name": "latitud",
+                      "expression": "`latitud`"
+                    },
+                    {
+                      "name": "longitud",
+                      "expression": "`longitud`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "symbol-map",
+              "encodings": {
+                "coordinates": {
+                  "latitude": {
+                    "fieldName": "latitud"
+                  },
+                  "longitude": {
+                    "fieldName": "longitud"
+                  }
+                },
+                "color": {
+                  "fieldName": "comunidadAutonoma",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 1,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "46673f65",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "0f3efd9e",
+                  "fields": [
+                    {
+                      "name": "comunidadAutonoma",
+                      "expression": "`comunidadAutonoma`"
+                    },
+                    {
+                      "name": "measure(count)",
+                      "expression": "MEASURE(`count`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "comunidadAutonoma",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "measure(count)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "comunidadAutonoma",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 1,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "70d04103",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "0f3efd9e",
+                  "fields": [
+                    {
+                      "name": "countdistinct(categoria)",
+                      "expression": "COUNT(DISTINCT `categoria`)"
+                    },
+                    {
+                      "name": "categoria",
+                      "expression": "`categoria`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "pie",
+              "encodings": {
+                "angle": {
+                  "fieldName": "countdistinct(categoria)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "categoria",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 7,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "seleccionar-comunidad",
+            "queries": [
+              {
+                "name": "dashboards/01f1ccb3d5f119bb89e322ecb0d65984/datasets/01f1ccb6e9b012868444ec960454b33b_comunidadAutonoma",
+                "query": {
+                  "datasetName": "0f3efd9e",
+                  "fields": [
+                    {
+                      "name": "comunidadAutonoma",
+                      "expression": "`comunidadAutonoma`"
+                    },
+                    {
+                      "name": "comunidadAutonoma_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Seleccionar Comunidad",
+                  "fields": []
+                }
+              },
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "comunidadAutonoma",
+                    "queryName": "dashboards/01f1ccb3d5f119bb89e322ecb0d65984/datasets/01f1ccb6e9b012868444ec960454b33b_comunidadAutonoma"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 7,
+            "width": 4,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "total-ingresos",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "0f3efd9e",
+                  "fields": [
+                    {
+                      "name": "sum(importeTotal)",
+                      "expression": "SUM(`importeTotal`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Total ingresos",
+                  "fields": []
+                }
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(importeTotal)"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 8,
+            "width": 3,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "numero-de-compras",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "0f3efd9e",
+                  "fields": [
+                    {
+                      "name": "measure(count)",
+                      "expression": "MEASURE(`count`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Número de compras",
+                  "fields": []
+                }
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "measure(count)"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 10,
+            "width": 3,
+            "height": 2
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
